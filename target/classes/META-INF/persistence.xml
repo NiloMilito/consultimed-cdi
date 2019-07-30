@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+                                 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+ 
+    <persistence-unit name="CONSULTEMED" transaction-type="RESOURCE_LOCAL">
+        
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>br.com.consultemed.model.Pessoa</class>
+        <class>br.com.consultemed.model.Medico</class>
+        <class>br.com.consultemed.model.DiasAtendimento</class>
+        <class>br.com.consultemed.model.AbstractEntity</class>
+        <class>br.com.consultemed.model.Endereco</class>
+        <class>br.com.consultemed.model.Exame</class>
+        <class>br.com.consultemed.model.Consulta</class>
+        <class>br.com.consultemed.model.Paciente</class>
+        <class>br.com.consultemed.model.Prontuario</class>
+        <class>br.com.consultemed.model.Agendamento</class>
+        <class>br.com.consultemed.model.Contato</class>
+        
+        <properties>
+        	<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/consultamed" /> <!-- BD Mane -->
+            <property name="javax.persistence.jdbc.user" value="postgres" /> <!-- DB User -->
+            <property name="javax.persistence.jdbc.password" value="12345" /> <!-- DB Password -->
+
+	    	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> <!-- DB Dialect -->
+            <property name="hibernate.hbm2ddl.auto" value="update" /> <!-- create / create-drop / update -->
+            
+            <property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
+            <property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
+            <!--  <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/consultamed"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="12345"/>
+            
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.connection.useUnicode" value="true"/>
+            <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
+            <property name="hibernate.current_session_context_class" value="thread"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2dll.auto" value="update" /> -->
+            
+        </properties>
+    </persistence-unit>
+ 
+</persistence>
