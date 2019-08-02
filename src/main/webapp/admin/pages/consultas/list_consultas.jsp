@@ -52,7 +52,7 @@
 		 <div class="box box-info">
 		 
             <div class="box-header with-border">
-              <h3 class="box-title">Lista Usuários</h3>
+              <h3 class="box-title">Lista Consultas</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -66,27 +66,23 @@
                 <table class="table no-margin">
                   <thead>
                   <tr>
-                    <th>Nome</th>
-                    <th>Login</th>
-                    <th>Status</th>
-                    <th>Permissões</th>
+                    <th>Paciente</th>
+                    <th>Medico</th>
+                    <th>Data</th>
+                    <th>Exames</th>
                     <th>Ações</th>
                   </tr>
                   </thead>
-					<c:forEach var="u" items="${usuarios}">
+					<c:forEach var="u" items="${consultas}">
 						<tr>
-							<td>${u.nome == null ? '' : u.nome}</td>
-							<td>${u.login == null ? '' : u.login}</td>
-							<td>${u.ativo ? 'Ativo' : 'Inativo'}</td>
-							<td>${u.administrador ? 'Administrador' : ''}  ${u.visitante ? 'Visitante' : ''}</td>
+							<td>${u.paciente.nome == null ? '' : u.paciente.nome}</td>
+							<td>${u.medico.nome == null ? '' : u.medico.nome}</td>							
+						
 							<td>
-                        		<a href="${pageContext.request.contextPath}/admin/usuarios?id=${u.id}&action=editar" class="btn btn-sm btn-primary">Editar</a>&nbsp;&nbsp;&nbsp;
+                        		<a href="${pageContext.request.contextPath}/admin/consultas?id=${u.id}&action=editar" class="btn btn-sm btn-primary">Editar</a>&nbsp;&nbsp;&nbsp;
                         		
                         		<a onclick="setaDadosModal(${u.id});" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">Excluir</a>
-                        		 
-								<a href="${pageContext.request.contextPath}/admin/usuarios?id=${u.id}&action=ativar_desativar" 
-                        				class="${u.ativo ? "btn btn-sm btn-warning" : "btn btn-sm btn-success" }">${u.ativo ? 'Desativar' : 'Ativar'}</a>
-							</td>
+                        	</td>
 						</tr>
 				
 				</c:forEach>
@@ -94,7 +90,7 @@
               </div>
             </div>
             <div class="box-footer clearfix">
-				<a href="${pageContext.request.contextPath}/admin/usuarios?action=novo" class="btn btn-sm btn-primary">Novo</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="${pageContext.request.contextPath}/admin/consultas?action=novo" class="btn btn-sm btn-primary">Novo</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				
             </div>
           </div>
@@ -105,32 +101,28 @@
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">Excluir Usuário</h5>
+		        <h5 class="modal-title" id="exampleModalLabel">Excluir Consulta</h5>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
 		      </div>
 		      <div class="modal-body">
-		        <strong>Deseja excluir o usuário selecionado ?</strong>
+		        <strong>Deseja excluir a consulta selecionada ?</strong>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-		        <a id="removerUsuario" class="btn btn-danger">Deletar</a>
+		        <a id="remover" class="btn btn-danger">Deletar</a>
 		      </div>
 		    </div>
 		  </div>
 		</div>
 		
-		<script type="text/javascript">
-		
-		function setaDadosModal(valor) {
-			var remove = '${pageContext.request.contextPath}/admin/usuarios?id='+valor+'&action=delete';
-		    document.getElementById('removerUsuario').href = remove;
-		}
-	
-	
-	
-	</script>
+		<script type="text/javascript">		
+			function setaDadosModal(valor) {
+				var remove = '${pageContext.request.contextPath}/admin/consultas?id='+valor+'&action=delete';
+				document.getElementById('remover').href = remove;
+			}	
+		</script>
 		
 		
 	</section>

@@ -15,6 +15,7 @@ public class Constantes {
 	public static final String DELETE = "delete";
 	public static final String EDITAR = "editar";
 	public static final String LISTAR = "list";
+	public static final String LISTARPACIENTES = "listPacientes";
 	public static final String ATIVAR_DESATIVAR = "ativar_desativar";
 	
 	//VALIDAÇÃO DE INPUTS

@@ -7,9 +7,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,12 +25,34 @@ public class Consulta extends AbstractEntity<Long> {
 	@Column(name="motivo")
 	private String motivo;
 	
+	@OneToOne
+	private Paciente paciente;
+	
+	@ManyToOne
+	private Medico medico;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="data_consulta")
 	private Date dataConsulta;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "consulta")
 	private List<Exame> exames = new ArrayList<>();
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
+	public Medico getMedico() {
+		return medico;
+	}
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
+	}
 
 	public String getMotivo() {
 		return motivo;

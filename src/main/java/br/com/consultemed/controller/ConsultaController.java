@@ -12,8 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.consultemed.model.Consulta;
+import br.com.consultemed.model.Medico;
+import br.com.consultemed.model.Paciente;
 import br.com.consultemed.service.ConsultaService;
 import br.com.consultemed.service.IConsulta;
+import br.com.consultemed.service.IMedico;
+import br.com.consultemed.service.IPaciente;
+import br.com.consultemed.service.MedicoService;
+import br.com.consultemed.service.PacienteService;
 import br.com.consultemed.utils.Constantes;
 
 /**
@@ -25,12 +31,18 @@ public class ConsultaController extends HttpServlet {
 	
 	@Inject
 	private IConsulta cservice;
+	@Inject
+	private IPaciente pservice;
+	@Inject
+	private IMedico mservice;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ConsultaController() {
        this.cservice = new ConsultaService();
+       this.pservice = new PacienteService();
+       this.mservice = new MedicoService();
     }
 
 	/**
@@ -50,24 +62,38 @@ public class ConsultaController extends HttpServlet {
 			case Constantes.EDITAR:
 				doPut(request, response);
 				break;
-			case Constantes.LISTAR :
+			case Constantes.LISTAR:
 				list(request, response);
-				break;			
+				break;	
+			case Constantes.LISTARPACIENTES:
+				listPacientes(request, response);
+				break;	
 			}
 		} catch (Exception ex) {
 			throw new ServletException(ex);
 		}
 	}
 	
-	private void novo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void novo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		RequestDispatcher rd = request.getRequestDispatcher(Constantes.ADD_CONSULTAS);
+		Collection<Paciente> pacientes = this.pservice.listar();
+		Collection<Medico> medicos = this.mservice.listar();
+		request.setAttribute("pacientes", pacientes);
+		request.setAttribute("medicos", medicos);
 		rd.forward(request, response);
 	}
 	
 	private void list(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		RequestDispatcher rd = request.getRequestDispatcher(Constantes.CONSULTAS);
-		Collection<Consulta> exames = this.cservice.listar();
-		request.setAttribute("exames", exames);
+		Collection<Consulta> consultas = this.cservice.listar();
+		request.setAttribute("consultas", consultas);
+		rd.forward(request, response);		
+	}
+	
+	private void listPacientes(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		RequestDispatcher rd = request.getRequestDispatcher(Constantes.PACIENTES);
+		Collection<Paciente> pacientes = this.pservice.listar();
+		request.setAttribute("pacientes", pacientes);
 		rd.forward(request, response);		
 	}
 

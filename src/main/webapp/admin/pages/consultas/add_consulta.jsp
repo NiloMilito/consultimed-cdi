@@ -48,20 +48,30 @@
 				<div class="form-group">
 					<div class="col-md-6">
 						<div class="form-group">
-						  <label>Exames</label>
-						  <select class="form-control select2" multiple="multiple"
-								data-placeholder="Selecione os exames" style="width: 100%;">
-							<option>Alabama</option>
-							<option>Alaska</option>
-							<option>California</option>
-							<option>Delaware</option>
-							<option>Tennessee</option>
-							<option>Texas</option>
-							<option>Washington</option>
+						  <label>Paciente</label>
+
+						  <select class="form-control select2" style="width: 100%;">
+								<c:forEach var="paciente" items="${pacientes}">  
+									<option value="${paciente}">${paciente.nome}</option>  						
+								</c:forEach>  
 						  </select>
 						</div>
 					</div>
-				</div>
+				</div>		
+				
+				<div class="form-group">
+					<div class="col-md-6">
+						<div class="form-group">
+						  <label>Médico</label>
+
+						  <select class="form-control select2" style="width: 100%;">
+								<c:forEach var="medico" items="${medicos}">  
+									<option value="${medico}">${medico.nome}</option>  						
+								</c:forEach>  
+						  </select>
+						</div>
+					</div>
+				</div>	
 								
               </div>
 				<div class="box-footer">

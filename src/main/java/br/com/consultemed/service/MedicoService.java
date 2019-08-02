@@ -29,7 +29,7 @@ public class MedicoService implements IMedico{
 	}
 
 	@Override
-	public Object buscar(Long id) {
+	public Medico buscar(Long id) {
 		try {
 			return this.medicoDao.findById(id);
 		} catch (Exception e) {
@@ -54,8 +54,7 @@ public class MedicoService implements IMedico{
 	}
 
 	@Override
-	public void salvar(Object object) {
-		Medico medico = (Medico) object;		
+	public void salvar(Medico medico) {		
 		try {
 			this.diasDao.save(medico.getDiasAtendimento());
 			this.medicoDao.save(medico);
@@ -65,8 +64,7 @@ public class MedicoService implements IMedico{
 	}
 
 	@Override
-	public void alterar(Object object) {
-		Medico medico = (Medico) object;		
+	public void alterar(Medico medico) {		
 		try {
 			this.diasDao.update(medico.getDiasAtendimento());
 			this.medicoDao.update(medico);			

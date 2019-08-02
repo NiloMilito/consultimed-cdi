@@ -15,10 +15,11 @@ import br.com.consultemed.utils.JPAUtils;
 public class PacienteDao implements IPacienteDao{
 	
 	private EntityManagerFactory factory = JPAUtils.getEntityManagerFactory();
-	private EntityManager manager = factory.createEntityManager();
+	private EntityManager manager = null;
 
 	@Override
 	public Paciente buscarPorNome(String nome) {
+		this.manager = factory.createEntityManager();
 		Query query = this.manager.createQuery("SELECT a FROM Paciente a Where a.nome LIKE :nome ");
 		query.setParameter("nome", nome);	
 		return (Paciente) query.getSingleResult();
@@ -26,6 +27,7 @@ public class PacienteDao implements IPacienteDao{
 
 	@Override
 	public Paciente buscarPorCpf(String cpf) {
+		this.manager = factory.createEntityManager();
 		Query query = this.manager.createQuery("SELECT a FROM Paciente a Where a.cpf LIKE :cpf ");
 		query.setParameter("cpf", cpf);	
 		return (Paciente) query.getSingleResult();
@@ -33,6 +35,7 @@ public class PacienteDao implements IPacienteDao{
 
 	@Override
 	public void save(Paciente paciente) throws Exception {
+		this.manager = factory.createEntityManager();
 		this.manager.getTransaction().begin();
 		this.manager.persist(paciente);
 		this.manager.getTransaction().commit();
@@ -47,6 +50,7 @@ public class PacienteDao implements IPacienteDao{
 
 	@Override
 	public void deleteById(Long id) throws Exception {
+		this.manager = factory.createEntityManager();
 		this.manager.getTransaction().begin();
 		Paciente paciente = this.findById(id);
 		this.manager.remove(paciente);
@@ -56,6 +60,7 @@ public class PacienteDao implements IPacienteDao{
 
 	@Override
 	public void update(Paciente paciente) throws Exception {
+		this.manager = factory.createEntityManager();
 		this.manager.getTransaction().begin();
 		this.manager.merge(paciente);
 		this.manager.getTransaction().commit();
